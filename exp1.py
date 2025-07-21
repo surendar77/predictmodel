@@ -16,9 +16,10 @@ if st.button("Predict"):
     })
     st.write("Status code:", response.status_code)
     st.write("Raw response text:", response.text)
-
-    if response.status_code == 200:
-        result = response.json()
-        st.success(f"🎯 Prediction: {result['prediction']} (Code: {result['code']})")
-    else:
-        st.error("❌ Failed to get prediction. Check API server.")
+    result=response.json()
+    st.write(result)
+    # if response.status_code == 200:
+    #     result = response.json()
+    #     st.success(f"🎯 Prediction: {result['prediction']} (Code: {result['code']})")
+    # else:
+    #     st.error("❌ Failed to get prediction. Check API server.")
