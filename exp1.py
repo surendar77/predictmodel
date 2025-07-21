@@ -1,0 +1,22 @@
+import streamlit as st
+import requests
+
+st.title("📊 Student Result Predictor")
+
+math = st.number_input("Math Marks", min_value=0, max_value=100)
+science = st.number_input("Science Marks", min_value=0, max_value=100)
+english = st.number_input("English Marks", min_value=0, max_value=100)
+
+if st.button("Predict"):
+    # Call your FastAPI endpoint
+    response = requests.post("http://127.0.0.1:8000/predict", json={
+        "Math": math,
+        "Science": science,
+        "English": english
+    })
+
+    if response.status_code == 200:
+        result = response.json()
+        st.success(f"🎯 Prediction: {result['prediction']} (Code: {result['code']})")
+    else:
+        st.error("❌ Failed to get prediction. Check API server.")
