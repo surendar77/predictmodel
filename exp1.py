@@ -14,6 +14,8 @@ if st.button("Predict"):
         "Science": science,
         "English": english
     })
+    st.write("Status code:", response.status_code)
+    st.write("Raw response text:", response.text)
 
     if response.status_code == 200:
         result = response.json()
