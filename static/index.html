@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Result Predictor</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background-color: #f8f9fa;
+    }
+    h1 {
+      color: #2c3e50;
+    }
+    input {
+      padding: 10px;
+      margin: 5px;
+      width: 100px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    #result {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 1.2em;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Student Result Predictor</h1>
+
+  <label>Math:</label>
+  <input type="number" id="math" /><br/>
+
+  <label>Science:</label>
+  <input type="number" id="science" /><br/>
+
+  <label>English:</label>
+  <input type="number" id="english" /><br/>
+
+  <button onclick="predictResult()">Predict</button>
+
+  <div id="result"></div>
+
+  <script>
+    async function predictResult() {
+      const math = parseFloat(document.getElementById('math').value);
+      const science = parseFloat(document.getElementById('science').value);
+      const english = parseFloat(document.getElementById('english').value);
+
+      const response = await fetch("http://127.0.0.1:8000/predict", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ Math: math, Science: science, English: english })
+      });
+
+      const data = await response.json();
+      document.getElementById("result").innerText = `Prediction: ${data.prediction} (Code: ${data.code})`;
+    }
+  </script>
+
+</body>
+</html>
