@@ -9,7 +9,7 @@ english = st.number_input("English Marks", min_value=0, max_value=100)
 
 if st.button("Predict"):
     # Call your FastAPI endpoint
-    response = requests.post("http://127.0.0.1:8000/predict", json={
+    response = requests.post("https://predictmodel-xn8hcbq5xajxuw6acxes9m.streamlit.app/predict", json={
         "Math": math,
         "Science": science,
         "English": english
